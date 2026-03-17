@@ -59,7 +59,6 @@ jobs:
   pytest:
     name: pytest
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('api/requirements.txt') != '' || hashFiles('api/pyproject.toml') != '' }}
     services:
       postgres:
         image: postgres:16-alpine
@@ -75,15 +74,26 @@ jobs:
           --health-retries 5
     steps:
       - uses: actions/checkout@v4
+      - name: Check api/ exists
+        id: check_api
+        run: |
+          if [ -f "api/requirements.txt" ] || [ -f "api/pyproject.toml" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
       - uses: actions/setup-python@v5
+        if: steps.check_api.outputs.exists == 'true'
         with:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: api/requirements.txt
       - name: Install dependencies
-        run: pip install -r api/requirements.txt
+        if: steps.check_api.outputs.exists == 'true'
+        run: pip install -r requirements.txt aiosqlite anyio
         working-directory: api
       - name: Run pytest
+        if: steps.check_api.outputs.exists == 'true'
         run: pytest --tb=short -q
         working-directory: api
         env:
@@ -97,24 +107,36 @@ jobs:
   next-build:
     name: Next.js build
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('web/package.json') != '' }}
     steps:
       - uses: actions/checkout@v4
+      - name: Check web/ exists
+        id: check_web
+        run: |
+          if [ -f "web/package.json" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
       - uses: pnpm/action-setup@v4
+        if: steps.check_web.outputs.exists == 'true'
         with:
           version: latest
       - uses: actions/setup-node@v4
+        if: steps.check_web.outputs.exists == 'true'
         with:
           node-version: "20"
           cache: pnpm
           cache-dependency-path: web/pnpm-lock.yaml
       - name: Install dependencies
+        if: steps.check_web.outputs.exists == 'true'
         run: pnpm install --frozen-lockfile
         working-directory: web
       - name: Type check
+        if: steps.check_web.outputs.exists == 'true'
         run: pnpm tsc --noEmit
         working-directory: web
       - name: Build
+        if: steps.check_web.outputs.exists == 'true'
         run: pnpm build
         working-directory: web
         env:
