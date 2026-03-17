@@ -419,8 +419,8 @@ $ worklog publish
 - [ ] `[FE]` Vercel 배포 + 환경변수 NEXT_PUBLIC_API_URL 설정
 - [x] `[BE]` GET /api/v1/portfolios/{slug} — 공개 조회 (인증 불필요)
 - [x] `[BE]` GET /api/v1/portfolios — 내 포트폴리오 목록 (JWT 필요)
-- [ ] `[Infra]` Dockerfile (BE) 멀티스테이지 빌드
-- [ ] `[Infra]` docker-compose.yml (api + postgres + redis)
+- [x] `[Infra]` Dockerfile (BE) 멀티스테이지 빌드
+- [x] `[Infra]` docker-compose.yml (api + postgres + redis)
 - [x] `[Infra]` .github/workflows/ci.yml — cargo test + pytest + next build 병렬
 
 #### Phase 4 — v1.0 완성

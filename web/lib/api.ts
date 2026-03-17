@@ -4,15 +4,20 @@ const API_URL =
   process.env.NEXT_PUBLIC_API_URL ?? "https://api.worklog.dev";
 
 export async function getPortfolio(slug: string): Promise<PortfolioData | null> {
-  const res = await fetch(`${API_URL}/api/v1/portfolios/${slug}`, {
-    next: { revalidate: 60 }, // ISR: 60초마다 재검증
-  });
+  try {
+    const res = await fetch(`${API_URL}/api/v1/portfolios/${slug}`, {
+      next: { revalidate: 60 }, // ISR: 60초마다 재검증
+    });
 
-  if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`API error ${res.status}`);
+    if (res.status === 404) return null;
+    if (!res.ok) return null;
 
-  const json = await res.json();
-  return PortfolioSchema.parse(json);
+    const json = await res.json();
+    return PortfolioSchema.parse(json);
+  } catch {
+    // API 서버 미연결 (로컬 개발 / 도메인 미설정) → 404 처리
+    return null;
+  }
 }
 
 export async function getAllSlugs(): Promise<string[]> {
