@@ -1,0 +1,51 @@
+name: Coverage
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  coverage:
+    name: cargo-tarpaulin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Install cargo-tarpaulin
+        run: cargo install cargo-tarpaulin
+
+      - name: Run coverage
+        run: |
+          cargo tarpaulin \
+            --all-features \
+            --workspace \
+            --timeout 120 \
+            --out Xml \
+            --output-dir coverage
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: coverage/cobertura.xml
+          fail_ci_if_error: false
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Check coverage threshold (≥ 70%)
+        run: |
+          COVERAGE=$(grep -oP 'line-rate="\K[^"]+' coverage/cobertura.xml | head -1)
+          PERCENT=$(echo "$COVERAGE * 100" | bc -l | xargs printf "%.0f")
+          echo "Coverage: ${PERCENT}%"
+          if [ "$PERCENT" -lt 70 ]; then
+            echo "Coverage ${PERCENT}% is below 70% threshold"
+            exit 1
+          fi

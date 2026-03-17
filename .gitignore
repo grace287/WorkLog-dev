@@ -1,0 +1,41 @@
+# Rust
+/target/
+Cargo.lock
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+dist/
+
+# Next.js
+web/.next/
+web/node_modules/
+web/.env*.local
+
+# 환경변수
+.env
+.env.local
+api/.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.iml
+.vscode/settings.json
+
+# Claude Code (로컬 설정만 제외, project 설정은 커밋)
+.claude/settings.local.json
+
+# 커버리지
+coverage/
+*.profraw
+lcov.info
