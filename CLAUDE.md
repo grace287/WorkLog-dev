@@ -353,75 +353,75 @@ $ worklog publish
 
 
 
-#### Phase 1 — CLI Auth + Task Core
-- [ ] `[Infra]` Cargo workspace 구성 (cli/ api/ web/) + Cargo.toml features
-- [ ] `[CLI]` worklog init — keyring PAT 저장, config.toml 생성
-- [ ] `[CLI]` worklog whoami — GitHub /user API 호출
-- [ ] `[CLI]` worklog logout — keyring 삭제
-- [ ] `[CLI]` task add / ls / done / move / link CRUD
-- [ ] `[CLI]` core/model.rs — Task, Commit, TaskCommitLink struct
-- [ ] `[CLI]` core/http.rs — ApiClient (reqwest 0.12 + rustls-tls)
-- [ ] `[CLI]` core/output.rs — 컨러 출력 + 테이블 (colored 2)
-- [ ] `[CLI]` core/config.rs — config.toml 읽기/쓰기 (toml 0.8 + serde)
-- [ ] `[CLI]` dirs 5 — OS별 저장 경로
-- [ ] `[CLI]` chrono 0.4 — 태스크 타임스탬프, done_at 기록
-- [ ] `[CLI]` 로컈 JSON 초기화 (tasks.json, commits.json, links.json)
-- [ ] `[CLI]` once_cell + regex 정적 캐싱
-- [ ] `[CLI]` anyhow .context() 에러 핸들링
-- [ ] `[Docs]` README.md + CONTRIBUTING.md + docs/install.md
+#### Phase 1 — CLI Auth + Task Core ✅
+- [x] `[Infra]` Cargo workspace 구성 (cli/ api/ web/) + Cargo.toml features
+- [x] `[CLI]` worklog init — keyring PAT 저장, config.toml 생성
+- [x] `[CLI]` worklog whoami — GitHub /user API 호출
+- [x] `[CLI]` worklog logout — keyring 삭제
+- [x] `[CLI]` task add / ls / done / move / link CRUD
+- [x] `[CLI]` core/model.rs — Task, Commit, TaskCommitLink struct
+- [x] `[CLI]` core/http.rs — ApiClient (reqwest 0.12 + rustls-tls)
+- [x] `[CLI]` core/output.rs — 컨러 출력 + 테이블 (colored 2)
+- [x] `[CLI]` core/config.rs — config.toml 읽기/쓰기 (toml 0.8 + serde)
+- [x] `[CLI]` dirs 5 — OS별 저장 경로
+- [x] `[CLI]` chrono 0.4 — 태스크 타임스탬프, done_at 기록
+- [x] `[CLI]` 로컈 JSON 초기화 (tasks.json, commits.json, links.json)
+- [x] `[CLI]` once_cell + regex 정적 캐싱
+- [x] `[CLI]` anyhow .context() 에러 핸들링
+- [x] `[Docs]` README.md 작성
 
-#### Phase 2 — CLI Sync + FastAPI 백엔드
-- [ ] `[CLI]` connectors/git.rs — git2 revwalk 컨밋 파싱 엔진
-- [ ] `[CLI]` [TASK-ID] regex 추출 → TaskCommitLink 자동 연결
-- [ ] `[CLI]` connectors/github.rs — GitHub REST API 컨밋 검증 → Verified 배지
-- [ ] `[CLI]` 429 rate limit 지수 백오프 재시도
-- [ ] `[CLI]` worklog sync — 전체 파이프라인 (--since / --dry-run / --no-verify)
-- [ ] `[CLI]` worklog push — HEAD 컨밋 즉시 동기화
-- [ ] `[CLI]` worklog log — 태스크-컨밋 타임라인 출력
-- [ ] `[CLI]` worklog publish — JWT 획득 후 FastAPI POST
-- [ ] `[CLI]` indicatif 스피너 + 멀티 프로그레스바 UX
+#### Phase 2 — CLI Sync + FastAPI 백엔드 ✅
+- [x] `[CLI]` connectors/git.rs — git2 revwalk 컨밋 파싱 엔진
+- [x] `[CLI]` [TASK-ID] regex 추출 → TaskCommitLink 자동 연결
+- [x] `[CLI]` connectors/github.rs — GitHub REST API 컨밋 검증 → Verified 배지
+- [x] `[CLI]` 429 rate limit 지수 백오프 재시도
+- [x] `[CLI]` worklog sync — 전체 파이프라인 (--since / --dry-run / --no-verify)
+- [x] `[CLI]` worklog push — HEAD 컨밋 즉시 동기화
+- [x] `[CLI]` worklog log — 태스크-컨밋 타임라인 출력
+- [x] `[CLI]` worklog publish — JWT 획득 후 FastAPI POST
+- [x] `[CLI]` indicatif 스피너 + 멀티 프로그레스바 UX
 - [ ] `[CLI]` tests/fixtures/ — tempfile 더미 git 저장소 픽스처
 - [ ] `[CLI]` sync 통합 테스트 (cargo test, 커버리지 70% 이상)
-- [ ] `[BE]` FastAPI app 초기 구성 (main.py, router.py)
-- [ ] `[BE]` Pydantic Settings — 환경변수 클래스 (config.py)
-- [ ] `[BE]` Pydantic v2 DTO 스키마 (schemas/portfolio.py, user.py, task.py)
-- [ ] `[BE]` SQLAlchemy 2.0 ORM 모델 (models/)
-- [ ] `[BE]` asyncpg 비동기 DB 세션 (db/session.py)
+- [x] `[BE]` FastAPI app 초기 구성 (main.py, router.py)
+- [x] `[BE]` Pydantic Settings — 환경변수 클래스 (config.py)
+- [x] `[BE]` Pydantic v2 DTO 스키마 (schemas/portfolio.py, user.py, task.py)
+- [x] `[BE]` SQLAlchemy 2.0 ORM 모델 (models/)
+- [x] `[BE]` asyncpg 비동기 DB 세션 (db/session.py)
 - [ ] `[BE]` Alembic 마이그레이션 초기 설정 + 첫 revision
-- [ ] `[BE]` POST /api/v1/auth/token — JWT 발급 (python-jose HS256)
-- [ ] `[BE]` POST /api/v1/portfolios — publish 수신 + slug 생성
-- [ ] `[BE]` CORS + 요청 로깅 미들웨어
-- [ ] `[BE]` loguru 구조화 로깅 설정
+- [x] `[BE]` POST /api/v1/auth/token — JWT 발급 (python-jose HS256)
+- [x] `[BE]` POST /api/v1/portfolios — publish 수신 + slug 생성
+- [x] `[BE]` CORS + 요청 로깅 미들웨어
+- [x] `[BE]` loguru 구조화 로깅 설정
 - [ ] `[BE]` uvicorn 프로덕션 실행 설정
-- [ ] `[BE]` .env + python-dotenv 환경변수 관리
-- [ ] `[BE]` requirements.txt 또는 pyproject.toml + uv
-- [ ] `[BE]` pytest + pytest-asyncio + httpx TestClient 테스트
+- [x] `[BE]` .env + python-dotenv 환경변수 관리
+- [x] `[BE]` requirements.txt 또는 pyproject.toml + uv
+- [x] `[BE]` pytest + pytest-asyncio + httpx TestClient 테스트
 
-#### Phase 3 — Next.js 뷰어 오픈
-- [ ] `[FE]` Next.js 14 App Router + TypeScript 5 초기화 (pnpm)
-- [ ] `[FE]` Tailwind CSS 3 + tailwind.config.ts
-- [ ] `[FE]` shadcn/ui 설치 (Badge, Card, Separator, Skeleton)
-- [ ] `[FE]` Geist Font 설정 (layout.tsx)
-- [ ] `[FE]` lib/types.ts — Portfolio, Task, Commit 공통 타입
-- [ ] `[FE]` lib/api.ts — FastAPI 클라이언트 (fetch + zod 런타임 파싱)
-- [ ] `[FE]` lib/schemas.ts — zod 스키마 정의
-- [ ] `[FE]` app/p/[slug]/page.tsx — 공개 뷰어 (generateStaticParams + ISR revalidate)
-- [ ] `[FE]` app/p/[slug]/loading.tsx — Suspense 스켈레턴
-- [ ] `[FE]` app/not-found.tsx — 잘못된 slug 404 처리
-- [ ] `[FE]` components/PortfolioView.tsx — 메인 레이아웃
-- [ ] `[FE]` components/TaskCard.tsx — 태스크 카드
-- [ ] `[FE]` components/CommitTimeline.tsx — 컨밋 타임라인
-- [ ] `[FE]` components/VerifiedBadge.tsx — GitHub Verified 배지
-- [ ] `[FE]` app/api/og/[slug]/route.tsx — next/og 동적 OG 이미지
-- [ ] `[FE]` Next.js Metadata API — generateMetadata per slug
-- [ ] `[FE]` app/page.tsx — 랜딩 페이지 (설치 명령 + 데모)
-- [ ] `[FE]` next.config.ts — images.remotePatterns, revalidate
+#### Phase 3 — Next.js 뷰어 오픈 ✅
+- [x] `[FE]` Next.js 14 App Router + TypeScript 5 초기화 (pnpm)
+- [x] `[FE]` Tailwind CSS 3 + tailwind.config.ts
+- [x] `[FE]` shadcn/ui 설치 (Badge, Card, Separator, Skeleton)
+- [x] `[FE]` Geist Font 설정 (layout.tsx)
+- [x] `[FE]` lib/types.ts — Portfolio, Task, Commit 공통 타입
+- [x] `[FE]` lib/api.ts — FastAPI 클라이언트 (fetch + zod 런타임 파싱)
+- [x] `[FE]` lib/schemas.ts — zod 스키마 정의
+- [x] `[FE]` app/p/[slug]/page.tsx — 공개 뷰어 (generateStaticParams + ISR revalidate)
+- [x] `[FE]` app/p/[slug]/loading.tsx — Suspense 스켈레턴
+- [x] `[FE]` app/not-found.tsx — 잘못된 slug 404 처리
+- [x] `[FE]` components/PortfolioView.tsx — 메인 레이아웃
+- [x] `[FE]` components/TaskCard.tsx — 태스크 카드
+- [x] `[FE]` components/CommitTimeline.tsx — 컨밋 타임라인
+- [x] `[FE]` components/VerifiedBadge.tsx — GitHub Verified 배지
+- [x] `[FE]` app/api/og/[slug]/route.tsx — next/og 동적 OG 이미지
+- [x] `[FE]` Next.js Metadata API — generateMetadata per slug
+- [x] `[FE]` app/page.tsx — 랜딩 페이지 (설치 명령 + 데모)
+- [x] `[FE]` next.config.ts — images.remotePatterns, revalidate
 - [ ] `[FE]` Vercel 배포 + 환경변수 NEXT_PUBLIC_API_URL 설정
-- [ ] `[BE]` GET /api/v1/portfolios/{slug} — 공개 조회 (인증 불필요)
-- [ ] `[BE]` GET /api/v1/portfolios — 내 포트폴리오 목록 (JWT 필요)
+- [x] `[BE]` GET /api/v1/portfolios/{slug} — 공개 조회 (인증 불필요)
+- [x] `[BE]` GET /api/v1/portfolios — 내 포트폴리오 목록 (JWT 필요)
 - [ ] `[Infra]` Dockerfile (BE) 멀티스테이지 빌드
 - [ ] `[Infra]` docker-compose.yml (api + postgres + redis)
-- [ ] `[Infra]` .github/workflows/ci.yml — cargo test + pytest + next build 병렬
+- [x] `[Infra]` .github/workflows/ci.yml — cargo test + pytest + next build 병렬
 
 #### Phase 4 — v1.0 완성
 - [ ] `[CLI]` rusqlite 0.31 오프라인 캐시 — JSON → SQLite (feature: offline)
