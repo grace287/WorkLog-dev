@@ -1,12 +1,17 @@
 import asyncio
 import os
 from logging.config import fileConfig
+from pathlib import Path
 
+from dotenv import load_dotenv
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
+
+# .env 파일 자동 로드 (api/ 디렉토리 기준)
+load_dotenv(Path(__file__).parent.parent / ".env")
 
 # --- 모델 임포트 (autogenerate 감지용) ---
 from app.db.session import Base  # noqa: F401
@@ -20,7 +25,7 @@ if config.config_file_name is not None:
 
 target_metadata = Base.metadata
 
-# DATABASE_URL 환경변수가 있으면 alembic.ini 값 덮어쓰기
+# DATABASE_URL 환경변수로 alembic.ini sqlalchemy.url 덮어쓰기
 database_url = os.environ.get("DATABASE_URL")
 if database_url:
     config.set_main_option("sqlalchemy.url", database_url)
