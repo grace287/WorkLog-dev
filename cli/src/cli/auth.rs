@@ -12,6 +12,14 @@ fn get_keyring_entry() -> Result<keyring::Entry> {
         .context("Failed to access OS keyring")
 }
 
+/// OS keyring에서 저장된 PAT를 로드한다.
+/// sync, publish 등 인증이 필요한 커맨드에서 공유 사용.
+pub fn load_pat() -> Result<String> {
+    get_keyring_entry()?
+        .get_password()
+        .context("No credentials found — run `worklog init` first")
+}
+
 pub async fn run_init() -> Result<()> {
     print_info("Enter your GitHub Personal Access Token (PAT):");
     print_info("  Required scopes: read:user, repo (for private repos)");
