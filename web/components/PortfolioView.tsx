@@ -1,6 +1,7 @@
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale";
 import { TaskCard } from "./TaskCard";
+import { ThemeToggle } from "./ThemeToggle";
 import type { Portfolio } from "@/lib/types";
 
 export function PortfolioView({ portfolio }: { portfolio: Portfolio }) {
@@ -15,21 +16,24 @@ export function PortfolioView({ portfolio }: { portfolio: Portfolio }) {
     <main className="mx-auto max-w-3xl px-4 py-12">
       {/* 헤더 */}
       <header className="mb-8">
-        <div className="flex items-baseline gap-3">
-          <h1 className="text-3xl font-bold tracking-tight text-zinc-900">
-            {portfolio.project_id}
-          </h1>
-          <span className="text-sm text-zinc-400">
-            published{" "}
-            {formatDistanceToNow(new Date(portfolio.published_at), {
-              addSuffix: true,
-              locale: ko,
-            })}
-          </span>
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-baseline gap-3 flex-wrap">
+            <h1 className="text-3xl font-bold tracking-tight">
+              {portfolio.project_id}
+            </h1>
+            <span className="text-sm text-zinc-400 dark:text-zinc-500">
+              published{" "}
+              {formatDistanceToNow(new Date(portfolio.published_at), {
+                addSuffix: true,
+                locale: ko,
+              })}
+            </span>
+          </div>
+          <ThemeToggle />
         </div>
 
         {/* 통계 */}
-        <div className="mt-4 flex gap-6 text-sm text-zinc-600">
+        <div className="mt-4 flex gap-6 text-sm text-zinc-600 dark:text-zinc-400">
           <Stat label="Tasks" value={`${doneTasks}/${portfolio.tasks.length} done`} />
           <Stat label="Evidence" value={`${totalCommits} commits`} />
           <Stat label="Verified" value={`${verifiedCommits}/${totalCommits}`} highlight={verifiedCommits > 0} />
@@ -61,8 +65,8 @@ function Stat({
 }) {
   return (
     <div>
-      <span className="text-zinc-400">{label}: </span>
-      <span className={highlight ? "font-semibold text-green-700" : "font-medium"}>{value}</span>
+      <span className="text-zinc-400 dark:text-zinc-500">{label}: </span>
+      <span className={highlight ? "font-semibold text-green-600 dark:text-green-400" : "font-medium"}>{value}</span>
     </div>
   );
 }

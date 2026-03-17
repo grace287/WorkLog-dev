@@ -387,7 +387,7 @@ $ worklog publish
 - [x] `[BE]` Pydantic v2 DTO 스키마 (schemas/portfolio.py, user.py, task.py)
 - [x] `[BE]` SQLAlchemy 2.0 ORM 모델 (models/)
 - [x] `[BE]` asyncpg 비동기 DB 세션 (db/session.py)
-- [ ] `[BE]` Alembic 마이그레이션 초기 설정 + 첫 revision
+- [x] `[BE]` Alembic 마이그레이션 초기 설정 + 첫 revision
 - [x] `[BE]` POST /api/v1/auth/token — JWT 발급 (python-jose HS256)
 - [x] `[BE]` POST /api/v1/portfolios — publish 수신 + slug 생성
 - [x] `[BE]` CORS + 요청 로깅 미들웨어
@@ -440,7 +440,7 @@ $ worklog publish
 - [ ] `[FE]` TanStack Query v5 — 대시보드 클라이언트 캐시
 - [ ] `[FE]` app/dashboard/page.tsx — 내 포트폴리오 목록
 - [ ] `[FE]` app/dashboard/[id]/edit/page.tsx — 포트폴리오 수정
-- [ ] `[FE]` 다크모드 (Tailwind dark: + next-themes)
+- [x] `[FE]` 다크모드 (Tailwind dark: + next-themes)
 - [ ] `[FE]` 반응형 레이아웃 (모바일 breakpoint)
 - [ ] `[Infra]` cargo-tarpaulin 커버리지 리포트 CI 연동
 - [ ] `[Infra]` Playwright E2E 테스트 — /p/{slug} 뷰어
